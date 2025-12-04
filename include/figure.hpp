@@ -47,7 +47,7 @@ public:
     }
     
     virtual Point center() const = 0;
-    virtual double area() const = 0;
+    virtual double area() const;
     virtual void print(std::ostream& os) const = 0;
     virtual void read(std::istream& is) = 0;
     
