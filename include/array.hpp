@@ -4,21 +4,19 @@
 
 class Array {
 private:
-    Figure** figures;          // Массив указателей на Figure
-    size_t capacity;           // Вместимость массива
-    size_t size_;              // Текущий размер массива
+    Figure** figures;           
+    size_t capacity;          
+    size_t size_;              
     
-    void resize();             // Увеличение capacity при необходимости
+    void resize();             
 
 public:
     Array();
     ~Array();
     
-    // Запрещаем копирование (или можно реализовать глубокое копирование)
     Array(const Array& other) = delete;
     Array& operator=(const Array& other) = delete;
     
-    // Перемещение
     Array(Array&& other) noexcept;
     Array& operator=(Array&& other) noexcept;
     
@@ -33,7 +31,6 @@ public:
     
     Figure* operator[](int index) const;
     
-    // Очистка массива (удаление всех фигур)
     void clear();
 };
 

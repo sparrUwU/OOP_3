@@ -34,13 +34,7 @@ Point Pentagon::center() const {
 }
 
 double Pentagon::area() const {
-    const auto& verts = getVertices();
-    double area = 0;
-    for (int i = 0; i < 5; ++i) {
-        int j = (i + 1) % 5;
-        area += verts[i].x * verts[j].y - verts[j].x * verts[i].y;
-    }
-    return std::abs(area) / 2.0;
+    return Figure::area();
 }
 
 void Pentagon::print(std::ostream& os) const {
@@ -69,6 +63,20 @@ bool Pentagon::operator==(const Figure& other) const {
     return getVertices() == pentagon->getVertices();
 }
 
+Pentagon& Pentagon::operator=(const Pentagon& other) {
+    if (this != &other) {
+        vertices = other.vertices;
+    }
+    return *this;
+}
+
+Pentagon& Pentagon::operator=(Pentagon&& other) noexcept {
+    if (this != &other) {
+        vertices = std::move(other.vertices);
+    }
+    return *this;
+}
+
 Pentagon& Pentagon::operator=(const Figure& other) {
     const Pentagon* pentagon = dynamic_cast<const Pentagon*>(&other);
     if (!pentagon) {
@@ -83,6 +91,7 @@ Pentagon& Pentagon::operator=(Figure&& other) {
     if (!pentagon) {
         throw std::invalid_argument("Cannot move assign non-Pentagon to Pentagon");
     }
-    setVertices(std::move(pentagon->getVertices()));
+    setVertices(std::move(pentagon->vertices));
     return *this;
+
 }

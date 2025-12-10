@@ -34,13 +34,7 @@ Point Octagon::center() const {
 }
 
 double Octagon::area() const {
-    const auto& verts = getVertices();
-    double area = 0;
-    for (int i = 0; i < 8; ++i) {
-        int j = (i + 1) % 8;
-        area += verts[i].x * verts[j].y - verts[j].x * verts[i].y;
-    }
-    return std::abs(area) / 2.0;
+    return Figure::area();
 }
 
 void Octagon::print(std::ostream& os) const {
@@ -67,6 +61,20 @@ bool Octagon::operator==(const Figure& other) const {
     const Octagon* octagon = dynamic_cast<const Octagon*>(&other);
     if (!octagon) return false;
     return getVertices() == octagon->getVertices();
+}
+
+Octagon& Octagon::operator=(const Octagon& other) {
+    if (this != &other) {
+        vertices = other.vertices;
+    }
+    return *this;
+}
+
+Octagon& Octagon::operator=(Octagon&& other) noexcept {
+    if (this != &other) {
+        vertices = std::move(other.vertices);
+    }
+    return *this;
 }
 
 Octagon& Octagon::operator=(const Figure& other) {

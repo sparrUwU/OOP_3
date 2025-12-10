@@ -14,10 +14,11 @@ public:
     void read(std::istream& is) override;
     
     bool operator==(const Figure& other) const override;
+    Hexagon& operator=(const Hexagon& other);         
+    Hexagon& operator=(Hexagon&& other) noexcept;
     Hexagon& operator=(const Figure& other) override;
     Hexagon& operator=(Figure&& other) override;
     
-    // Конструкторы копирования и перемещения
     Hexagon(const Hexagon& other);
     Hexagon(Hexagon&& other) noexcept;
 };

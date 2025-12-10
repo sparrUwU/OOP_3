@@ -34,13 +34,7 @@ Point Hexagon::center() const {
 }
 
 double Hexagon::area() const {
-    const auto& verts = getVertices();
-    double area = 0;
-    for (int i = 0; i < 6; ++i) {
-        int j = (i + 1) % 6;
-        area += verts[i].x * verts[j].y - verts[j].x * verts[i].y;
-    }
-    return std::abs(area) / 2.0;
+    return Figure::area();
 }
 
 void Hexagon::print(std::ostream& os) const {
@@ -67,6 +61,20 @@ bool Hexagon::operator==(const Figure& other) const {
     const Hexagon* hexagon = dynamic_cast<const Hexagon*>(&other);
     if (!hexagon) return false;
     return getVertices() == hexagon->getVertices();
+}
+
+Hexagon& Hexagon::operator=(const Hexagon& other) {
+    if (this != &other) {
+        vertices = other.vertices;
+    }
+    return *this;
+}
+
+Hexagon& Hexagon::operator=(Hexagon&& other) noexcept {
+    if (this != &other) {
+        vertices = std::move(other.vertices);
+    }
+    return *this;
 }
 
 Hexagon& Hexagon::operator=(const Figure& other) {

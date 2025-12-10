@@ -16,8 +16,9 @@ public:
     bool operator==(const Figure& other) const override;
     Pentagon& operator=(const Figure& other) override;
     Pentagon& operator=(Figure&& other) override;
+    Pentagon& operator=(const Pentagon& other);
+    Pentagon& operator=(Pentagon&& other) noexcept;
     
-    // Конструкторы копирования и перемещения
     Pentagon(const Pentagon& other);
     Pentagon(Pentagon&& other) noexcept;
 };
